@@ -14,12 +14,7 @@ set(BENCHMARK_USE_BUNDLED_GTEST OFF)
 set(BENCHMARK_ENABLE_GTEST_TESTS OFF)
 set(BENCHMARK_ENABLE_TESTING OFF)
 
-FetchContent_GetProperties(benchmark)
-
-if(NOT benchmark_POPULATED)
-  FetchContent_Populate(benchmark)
-  add_subdirectory(${benchmark_SOURCE_DIR} ${benchmark_BINARY_DIR} EXCLUDE_FROM_ALL)
-endif()
+FetchContent_MakeAvailable(benchmark)
 
 add_executable(tcob_benchmarks)
 
