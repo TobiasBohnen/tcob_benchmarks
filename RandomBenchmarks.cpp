@@ -13,7 +13,6 @@ void static RANDOM_xoroshiro_128_plus(benchmark::State& state)
     }
     state.SetItemsProcessed(state.iterations());
 }
-BENCHMARK(RANDOM_xoroshiro_128_plus)->Iterations(10000000);
 
 ////////////////////////////////////////////////////////////
 
@@ -26,7 +25,6 @@ void static RANDOM_xoroshiro_128_plus_plus(benchmark::State& state)
     }
     state.SetItemsProcessed(state.iterations());
 }
-BENCHMARK(RANDOM_xoroshiro_128_plus_plus)->Iterations(10000000);
 
 ////////////////////////////////////////////////////////////
 
@@ -39,7 +37,6 @@ void static RANDOM_xoroshiro_128_star_star(benchmark::State& state)
     }
     state.SetItemsProcessed(state.iterations());
 }
-BENCHMARK(RANDOM_xoroshiro_128_star_star)->Iterations(10000000);
 
 ////////////////////////////////////////////////////////////
 
@@ -52,7 +49,6 @@ void static RANDOM_split_mix_64(benchmark::State& state)
     }
     state.SetItemsProcessed(state.iterations());
 }
-BENCHMARK(RANDOM_split_mix_64)->Iterations(10000000);
 
 ////////////////////////////////////////////////////////////
 
@@ -65,7 +61,6 @@ void static RANDOM_xorshift_64(benchmark::State& state)
     }
     state.SetItemsProcessed(state.iterations());
 }
-BENCHMARK(RANDOM_xorshift_64)->Iterations(10000000);
 
 ////////////////////////////////////////////////////////////
 
@@ -78,7 +73,6 @@ void static RANDOM_xorshift_64_star(benchmark::State& state)
     }
     state.SetItemsProcessed(state.iterations());
 }
-BENCHMARK(RANDOM_xorshift_64_star)->Iterations(10000000);
 
 ////////////////////////////////////////////////////////////
 
@@ -91,7 +85,6 @@ void static RANDOM_xoshiro_256_plus(benchmark::State& state)
     }
     state.SetItemsProcessed(state.iterations());
 }
-BENCHMARK(RANDOM_xoshiro_256_plus)->Iterations(10000000);
 
 ////////////////////////////////////////////////////////////
 
@@ -104,7 +97,6 @@ void static RANDOM_xoshiro_256_plus_plus(benchmark::State& state)
     }
     state.SetItemsProcessed(state.iterations());
 }
-BENCHMARK(RANDOM_xoshiro_256_plus_plus)->Iterations(10000000);
 
 ////////////////////////////////////////////////////////////
 
@@ -117,4 +109,15 @@ void static RANDOM_xoshiro_256_star_star(benchmark::State& state)
     }
     state.SetItemsProcessed(state.iterations());
 }
+
+////////////////////////////////////////////////////////////
+
+BENCHMARK(RANDOM_xoroshiro_128_plus)->Iterations(10000000);
+BENCHMARK(RANDOM_xoroshiro_128_plus_plus)->Iterations(10000000);
+BENCHMARK(RANDOM_xoroshiro_128_star_star)->Iterations(10000000);
+BENCHMARK(RANDOM_split_mix_64)->Iterations(10000000);
+BENCHMARK(RANDOM_xorshift_64)->Iterations(10000000);
+BENCHMARK(RANDOM_xorshift_64_star)->Iterations(10000000);
+BENCHMARK(RANDOM_xoshiro_256_plus)->Iterations(10000000);
+BENCHMARK(RANDOM_xoshiro_256_plus_plus)->Iterations(10000000);
 BENCHMARK(RANDOM_xoshiro_256_star_star)->Iterations(10000000);

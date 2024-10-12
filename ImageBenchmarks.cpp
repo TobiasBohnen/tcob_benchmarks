@@ -12,4 +12,5 @@ void static IMAGE_decode_png(benchmark::State& state)
     }
     state.SetItemsProcessed(state.iterations());
 }
+
 BENCHMARK(IMAGE_decode_png)->Iterations(100000);

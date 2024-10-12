@@ -1,5 +1,7 @@
 #pragma once
 
+// IWYU pragma: always_keep
+
 #ifdef _MSC_VER
     #pragma warning(disable : 4706)
 #endif

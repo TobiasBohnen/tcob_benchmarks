@@ -32,7 +32,6 @@ void static INI_Parse(benchmark::State& state)
     }
     state.SetItemsProcessed(state.iterations());
 }
-BENCHMARK(INI_Parse)->Iterations(1000000);
 
 ////////////////////////////////////////////////////////////
 
@@ -67,7 +66,6 @@ void static BINI_Parse(benchmark::State& state)
     }
     state.SetItemsProcessed(state.iterations());
 }
-BENCHMARK(BINI_Parse)->Iterations(1000000);
 
 ////////////////////////////////////////////////////////////
 
@@ -111,7 +109,6 @@ void static XML_Parse(benchmark::State& state)
     }
     state.SetItemsProcessed(state.iterations());
 }
-BENCHMARK(XML_Parse)->Iterations(1000000);
 
 ////////////////////////////////////////////////////////////
 
@@ -142,7 +139,6 @@ void static JSON_Parse(benchmark::State& state)
     }
     state.SetItemsProcessed(state.iterations());
 }
-BENCHMARK(JSON_Parse)->Iterations(1000000);
 
 ////////////////////////////////////////////////////////////
 
@@ -179,7 +175,6 @@ point:
     }
     state.SetItemsProcessed(state.iterations());
 }
-BENCHMARK(YAML_Parse)->Iterations(1000000);
 
 ////////////////////////////////////////////////////////////
 
@@ -210,7 +205,6 @@ void static LUA_Parse(benchmark::State& state)
     }
     state.SetItemsProcessed(state.iterations());
 }
-BENCHMARK(LUA_Parse)->Iterations(1000000);
 
 ////////////////////////////////////////////////////////////
 
@@ -241,4 +235,13 @@ void static SQUIRREL_Parse(benchmark::State& state)
     }
     state.SetItemsProcessed(state.iterations());
 }
+
+////////////////////////////////////////////////////////////
+
+BENCHMARK(INI_Parse)->Iterations(1000000);
+BENCHMARK(BINI_Parse)->Iterations(1000000);
+BENCHMARK(XML_Parse)->Iterations(1000000);
+BENCHMARK(JSON_Parse)->Iterations(1000000);
+BENCHMARK(YAML_Parse)->Iterations(1000000);
+BENCHMARK(LUA_Parse)->Iterations(1000000);
 BENCHMARK(SQUIRREL_Parse)->Iterations(1000000);

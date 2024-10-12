@@ -12,7 +12,6 @@ void static LUA_NewScript(benchmark::State& state)
     }
     state.SetItemsProcessed(state.iterations());
 }
-BENCHMARK(LUA_NewScript)->Iterations(1000000);
 
 ////////////////////////////////////////////////////////////
 
@@ -25,7 +24,6 @@ void static LUA_RunScript(benchmark::State& state)
     }
     state.SetItemsProcessed(state.iterations());
 }
-BENCHMARK(LUA_RunScript)->Iterations(1000000);
 
 ////////////////////////////////////////////////////////////
 
@@ -39,7 +37,6 @@ void static LUA_SetString(benchmark::State& state)
     }
     state.SetItemsProcessed(state.iterations());
 }
-BENCHMARK(LUA_SetString)->Iterations(1000000);
 
 ////////////////////////////////////////////////////////////
 
@@ -53,7 +50,6 @@ void static LUA_SetStringView(benchmark::State& state)
     }
     state.SetItemsProcessed(state.iterations());
 }
-BENCHMARK(LUA_SetStringView)->Iterations(1000000);
 
 ////////////////////////////////////////////////////////////
 
@@ -68,7 +64,6 @@ void static LUA_GetAndCallFunction(benchmark::State& state)
     }
     state.SetItemsProcessed(state.iterations());
 }
-BENCHMARK(LUA_GetAndCallFunction)->Iterations(1000000);
 
 ////////////////////////////////////////////////////////////
 struct p {
@@ -124,7 +119,6 @@ void static LUA_StructConverter(benchmark::State& state)
     }
     state.SetItemsProcessed(state.iterations());
 }
-BENCHMARK(LUA_StructConverter)->Iterations(1000000);
 
 void static LUA_WrapperConverter(benchmark::State& state)
 {
@@ -143,4 +137,13 @@ void static LUA_WrapperConverter(benchmark::State& state)
     }
     state.SetItemsProcessed(state.iterations());
 }
+
+////////////////////////////////////////////////////////////
+
+BENCHMARK(LUA_NewScript)->Iterations(1000000);
+BENCHMARK(LUA_RunScript)->Iterations(1000000);
+BENCHMARK(LUA_SetString)->Iterations(1000000);
+BENCHMARK(LUA_SetStringView)->Iterations(1000000);
+BENCHMARK(LUA_GetAndCallFunction)->Iterations(1000000);
+BENCHMARK(LUA_StructConverter)->Iterations(1000000);
 BENCHMARK(LUA_WrapperConverter)->Iterations(1000000);

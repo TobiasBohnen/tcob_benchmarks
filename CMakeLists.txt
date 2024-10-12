@@ -21,6 +21,7 @@ add_executable(tcob_benchmarks)
 set(BENCH_SRCFILES
   main.cpp
   ImageBenchmarks.cpp
+  QuadTreeBenchmarks.cpp
   RandomBenchmarks.cpp
   TransformBenchmarks.cpp
 )
