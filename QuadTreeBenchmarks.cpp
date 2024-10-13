@@ -17,11 +17,11 @@ auto generateRandomNodes(std::size_t n) -> std::vector<Node>
     auto sizeDistribution   = std::uniform_real_distribution(0.0f, 0.01f);
     auto nodes              = std::vector<Node>(n);
     for (auto i = std::size_t(0); i < n; ++i) {
-        nodes[i].box.X      = originDistribution(generator);
-        nodes[i].box.Y      = originDistribution(generator);
-        nodes[i].box.Width  = std::min(1.0f - nodes[i].box.X, sizeDistribution(generator));
-        nodes[i].box.Height = std::min(1.0f - nodes[i].box.Y, sizeDistribution(generator));
-        nodes[i].id         = i;
+        nodes[i].box.Position.X  = originDistribution(generator);
+        nodes[i].box.Position.Y  = originDistribution(generator);
+        nodes[i].box.Size.Width  = std::min(1.0f - nodes[i].box.left(), sizeDistribution(generator));
+        nodes[i].box.Size.Height = std::min(1.0f - nodes[i].box.top(), sizeDistribution(generator));
+        nodes[i].id              = i;
     }
     return nodes;
 }
