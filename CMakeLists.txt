@@ -51,7 +51,7 @@ endif()
 target_include_directories(tcob_benchmarks PRIVATE . PRIVATE ../../tcob/include)
 
 set_target_properties(tcob_benchmarks PROPERTIES
-  CXX_STANDARD 23
+  CXX_STANDARD 20
   CXX_STANDARD_REQUIRED TRUE
 )
 
