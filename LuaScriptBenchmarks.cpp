@@ -66,6 +66,32 @@ void static LUA_GetAndCallFunction(benchmark::State& state)
 }
 
 ////////////////////////////////////////////////////////////
+
+void static LUA_ProtectedCall(benchmark::State& state)
+{
+    script                              s;
+    [[maybe_unused]] auto               res {s.run("function foo(p,q,r) return p.x + p.y + q.x + q.y + r.x + r.y end")};
+    tcob::scripting::lua::function<int> f {s.get_global_table()["foo"]};
+    for (auto _ : state) {
+        benchmark::DoNotOptimize(f.protected_call(point_i {10, 30}, point_i {42, 11}, point_i {88, 65}));
+    }
+    state.SetItemsProcessed(state.iterations());
+}
+
+////////////////////////////////////////////////////////////
+
+void static LUA_UnprotectedCall(benchmark::State& state)
+{
+    script                              s;
+    [[maybe_unused]] auto               res {s.run("function foo(p,q,r) return p.x + p.y + q.x + q.y + r.x + r.y end")};
+    tcob::scripting::lua::function<int> f {s.get_global_table()["foo"]};
+    for (auto _ : state) {
+        benchmark::DoNotOptimize(f.unprotected_call(point_i {10, 30}, point_i {42, 11}, point_i {88, 65}));
+    }
+    state.SetItemsProcessed(state.iterations());
+}
+
+////////////////////////////////////////////////////////////
 struct p {
     f32 x;
     f32 y;
@@ -147,3 +173,5 @@ BENCHMARK(LUA_SetStringView)->Iterations(1000000);
 BENCHMARK(LUA_GetAndCallFunction)->Iterations(1000000);
 BENCHMARK(LUA_StructConverter)->Iterations(1000000);
 BENCHMARK(LUA_WrapperConverter)->Iterations(1000000);
+BENCHMARK(LUA_ProtectedCall)->Iterations(1000000);
+BENCHMARK(LUA_UnprotectedCall)->Iterations(1000000);
