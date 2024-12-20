@@ -34,7 +34,4 @@ void static TRANSFORM_TransformPoint(benchmark::State& state)
     }
     state.SetItemsProcessed(state.iterations() * points.size());
 }
-
-////////////////////////////////////////////////////////////
-
 BENCHMARK(TRANSFORM_TransformPoint)->Iterations(1000000);

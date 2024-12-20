@@ -3,6 +3,8 @@
 
 using namespace tcob::scripting::lua;
 
+constexpr i32 NUM_ITERATIONS {1000000};
+
 ////////////////////////////////////////////////////////////
 
 void static INI_Parse(benchmark::State& state)
@@ -32,6 +34,7 @@ void static INI_Parse(benchmark::State& state)
     }
     state.SetItemsProcessed(state.iterations());
 }
+BENCHMARK(INI_Parse)->Iterations(NUM_ITERATIONS);
 
 ////////////////////////////////////////////////////////////
 
@@ -66,6 +69,7 @@ void static BINI_Parse(benchmark::State& state)
     }
     state.SetItemsProcessed(state.iterations());
 }
+BENCHMARK(BINI_Parse)->Iterations(NUM_ITERATIONS);
 
 ////////////////////////////////////////////////////////////
 
@@ -109,6 +113,7 @@ void static XML_Parse(benchmark::State& state)
     }
     state.SetItemsProcessed(state.iterations());
 }
+BENCHMARK(XML_Parse)->Iterations(NUM_ITERATIONS);
 
 ////////////////////////////////////////////////////////////
 
@@ -139,6 +144,37 @@ void static JSON_Parse(benchmark::State& state)
     }
     state.SetItemsProcessed(state.iterations());
 }
+BENCHMARK(JSON_Parse)->Iterations(NUM_ITERATIONS);
+
+void static JSON_Get(benchmark::State& state)
+{
+    static std::string jsonString {
+        R"({
+            "string": "Test",
+            "number": 12,
+            "bool": true,
+            "object": {
+               "childString": "foo",
+               "childNumber": 77453
+            },
+            "map": {
+               "a": 123,
+               "b": 456
+            },
+            "stringArray": ["One", "Two", "Three"],
+            "intArray": [1, 2, 3],
+            "point": { "x": 100, "y": 350 }
+        })"};
+    data::config::object obj;
+    obj.parse(jsonString, ".json");
+
+    for (auto _ : state) {
+        auto x = obj["stringArray"].as<data::config::array>();
+        benchmark::DoNotOptimize(x);
+    }
+    state.SetItemsProcessed(state.iterations());
+}
+BENCHMARK(JSON_Get)->Iterations(NUM_ITERATIONS);
 
 ////////////////////////////////////////////////////////////
 
@@ -175,9 +211,11 @@ point:
     }
     state.SetItemsProcessed(state.iterations());
 }
+BENCHMARK(YAML_Parse)->Iterations(NUM_ITERATIONS);
 
 ////////////////////////////////////////////////////////////
 
+#if defined(TCOB_ENABLE_ADDON_SCRIPTING_LUA)
 void static LUA_Parse(benchmark::State& state)
 {
     static std::string luaString {
@@ -205,9 +243,12 @@ void static LUA_Parse(benchmark::State& state)
     }
     state.SetItemsProcessed(state.iterations());
 }
+BENCHMARK(LUA_Parse)->Iterations(NUM_ITERATIONS);
+#endif
 
 ////////////////////////////////////////////////////////////
 
+#if defined(TCOB_ENABLE_ADDON_SCRIPTING_SQUIRREL)
 void static SQUIRREL_Parse(benchmark::State& state)
 {
     static std::string nutString {
@@ -235,13 +276,7 @@ void static SQUIRREL_Parse(benchmark::State& state)
     }
     state.SetItemsProcessed(state.iterations());
 }
+BENCHMARK(SQUIRREL_Parse)->Iterations(NUM_ITERATIONS);
+#endif
 
 ////////////////////////////////////////////////////////////
-
-BENCHMARK(INI_Parse)->Iterations(1000000);
-BENCHMARK(BINI_Parse)->Iterations(1000000);
-BENCHMARK(XML_Parse)->Iterations(1000000);
-BENCHMARK(JSON_Parse)->Iterations(1000000);
-BENCHMARK(YAML_Parse)->Iterations(1000000);
-BENCHMARK(LUA_Parse)->Iterations(1000000);
-BENCHMARK(SQUIRREL_Parse)->Iterations(1000000);

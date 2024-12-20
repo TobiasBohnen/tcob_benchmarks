@@ -20,17 +20,12 @@ add_executable(tcob_benchmarks)
 
 set(BENCH_SRCFILES
   main.cpp
+  DataObjectBenchmarks.cpp
   ImageBenchmarks.cpp
   QuadTreeBenchmarks.cpp
   RandomBenchmarks.cpp
   TransformBenchmarks.cpp
 )
-
-if(TCOB_ENABLE_ADDON_SCRIPTING_LUA)
-  list(APPEND BENCH_SRCFILES
-    DataObjectBenchmarks.cpp
-  )
-endif()
 
 if(TCOB_ENABLE_ADDON_SCRIPTING_LUA)
   list(APPEND BENCH_SRCFILES

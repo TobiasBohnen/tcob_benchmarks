@@ -56,6 +56,7 @@ void QUADTREE_Build(benchmark::State& state)
         for (auto& node : nodes) { quadtree.add(node); }
     }
 }
+BENCHMARK(QUADTREE_Build)->RangeMultiplier(10)->Range(100, 100000)->Unit(benchmark::kMillisecond);
 
 void QUADTREE_Query4(benchmark::State& state)
 {
@@ -68,6 +69,7 @@ void QUADTREE_Query4(benchmark::State& state)
         for (auto const& node : nodes) { intersections[node.id] = quadtree.query(node.box); }
     }
 }
+BENCHMARK(QUADTREE_Query4)->RangeMultiplier(10)->Range(100, 100000)->Unit(benchmark::kMillisecond);
 
 void QUADTREE_Query16(benchmark::State& state)
 {
@@ -80,6 +82,7 @@ void QUADTREE_Query16(benchmark::State& state)
         for (auto const& node : nodes) { intersections[node.id] = quadtree.query(node.box); }
     }
 }
+BENCHMARK(QUADTREE_Query16)->RangeMultiplier(10)->Range(100, 100000)->Unit(benchmark::kMillisecond);
 
 void QUADTREE_AddRemove(benchmark::State& state)
 {
@@ -92,6 +95,7 @@ void QUADTREE_AddRemove(benchmark::State& state)
         for (auto& node : nodes) { quadtree.add(node); }
     }
 }
+BENCHMARK(QUADTREE_AddRemove)->RangeMultiplier(10)->Range(100, 100000)->Unit(benchmark::kMillisecond);
 
 void QUADTREE_ReplacePadded(benchmark::State& state)
 {
@@ -111,6 +115,7 @@ void QUADTREE_ReplacePadded(benchmark::State& state)
         }
     }
 }
+BENCHMARK(QUADTREE_ReplacePadded)->RangeMultiplier(10)->Range(100, 100000)->Unit(benchmark::kMillisecond);
 
 void QUADTREE_ReplaceRandom(benchmark::State& state)
 {
@@ -126,6 +131,7 @@ void QUADTREE_ReplaceRandom(benchmark::State& state)
         }
     }
 }
+BENCHMARK(QUADTREE_ReplaceRandom)->RangeMultiplier(10)->Range(100, 100000)->Unit(benchmark::kMillisecond);
 
 void QUADTREE_FindAllIntersections(benchmark::State& state)
 {
@@ -137,6 +143,7 @@ void QUADTREE_FindAllIntersections(benchmark::State& state)
         auto intersections = quadtree.find_all_intersections();
     }
 }
+BENCHMARK(QUADTREE_FindAllIntersections)->RangeMultiplier(10)->Range(100, 100000)->Unit(benchmark::kMillisecond);
 
 void QUADTREE_BruteForceQuery(benchmark::State& state)
 {
@@ -146,6 +153,7 @@ void QUADTREE_BruteForceQuery(benchmark::State& state)
         for (auto const& node : nodes) { intersections[node.id] = query(node.box, nodes); }
     }
 }
+BENCHMARK(QUADTREE_BruteForceQuery)->RangeMultiplier(10)->Range(100, 100000)->Unit(benchmark::kMillisecond);
 
 void QUADTREE_BruteForceFindAllIntersections(benchmark::State& state)
 {
@@ -154,13 +162,4 @@ void QUADTREE_BruteForceFindAllIntersections(benchmark::State& state)
         auto intersections = findAllIntersections(nodes);
     }
 }
-
-BENCHMARK(QUADTREE_Build)->RangeMultiplier(10)->Range(100, 100000)->Unit(benchmark::kMillisecond);
-BENCHMARK(QUADTREE_Query4)->RangeMultiplier(10)->Range(100, 100000)->Unit(benchmark::kMillisecond);
-BENCHMARK(QUADTREE_Query16)->RangeMultiplier(10)->Range(100, 100000)->Unit(benchmark::kMillisecond);
-BENCHMARK(QUADTREE_AddRemove)->RangeMultiplier(10)->Range(100, 100000)->Unit(benchmark::kMillisecond);
-BENCHMARK(QUADTREE_ReplacePadded)->RangeMultiplier(10)->Range(100, 100000)->Unit(benchmark::kMillisecond);
-BENCHMARK(QUADTREE_ReplaceRandom)->RangeMultiplier(10)->Range(100, 100000)->Unit(benchmark::kMillisecond);
-BENCHMARK(QUADTREE_FindAllIntersections)->RangeMultiplier(10)->Range(100, 100000)->Unit(benchmark::kMillisecond);
-BENCHMARK(QUADTREE_BruteForceQuery)->RangeMultiplier(10)->Range(100, 100000)->Unit(benchmark::kMillisecond);
 BENCHMARK(QUADTREE_BruteForceFindAllIntersections)->RangeMultiplier(10)->Range(100, 100000)->Unit(benchmark::kMillisecond);

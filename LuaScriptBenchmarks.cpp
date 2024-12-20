@@ -3,6 +3,8 @@
 
 using namespace tcob::scripting::lua;
 
+constexpr i32 NUM_ITERATIONS {1000000};
+
 ////////////////////////////////////////////////////////////
 
 void static LUA_NewScript(benchmark::State& state)
@@ -12,6 +14,7 @@ void static LUA_NewScript(benchmark::State& state)
     }
     state.SetItemsProcessed(state.iterations());
 }
+BENCHMARK(LUA_NewScript)->Iterations(NUM_ITERATIONS);
 
 ////////////////////////////////////////////////////////////
 
@@ -24,6 +27,7 @@ void static LUA_RunScript(benchmark::State& state)
     }
     state.SetItemsProcessed(state.iterations());
 }
+BENCHMARK(LUA_RunScript)->Iterations(NUM_ITERATIONS);
 
 ////////////////////////////////////////////////////////////
 
@@ -37,6 +41,7 @@ void static LUA_SetString(benchmark::State& state)
     }
     state.SetItemsProcessed(state.iterations());
 }
+BENCHMARK(LUA_SetString)->Iterations(NUM_ITERATIONS);
 
 ////////////////////////////////////////////////////////////
 
@@ -50,6 +55,7 @@ void static LUA_SetStringView(benchmark::State& state)
     }
     state.SetItemsProcessed(state.iterations());
 }
+BENCHMARK(LUA_SetStringView)->Iterations(NUM_ITERATIONS);
 
 ////////////////////////////////////////////////////////////
 
@@ -64,6 +70,7 @@ void static LUA_GetAndCallFunction(benchmark::State& state)
     }
     state.SetItemsProcessed(state.iterations());
 }
+BENCHMARK(LUA_GetAndCallFunction)->Iterations(NUM_ITERATIONS);
 
 ////////////////////////////////////////////////////////////
 
@@ -77,6 +84,7 @@ void static LUA_ProtectedCall(benchmark::State& state)
     }
     state.SetItemsProcessed(state.iterations());
 }
+BENCHMARK(LUA_ProtectedCall)->Iterations(NUM_ITERATIONS);
 
 ////////////////////////////////////////////////////////////
 
@@ -90,6 +98,7 @@ void static LUA_UnprotectedCall(benchmark::State& state)
     }
     state.SetItemsProcessed(state.iterations());
 }
+BENCHMARK(LUA_UnprotectedCall)->Iterations(NUM_ITERATIONS);
 
 ////////////////////////////////////////////////////////////
 struct p {
@@ -145,6 +154,7 @@ void static LUA_StructConverter(benchmark::State& state)
     }
     state.SetItemsProcessed(state.iterations());
 }
+BENCHMARK(LUA_StructConverter)->Iterations(NUM_ITERATIONS);
 
 void static LUA_WrapperConverter(benchmark::State& state)
 {
@@ -163,15 +173,6 @@ void static LUA_WrapperConverter(benchmark::State& state)
     }
     state.SetItemsProcessed(state.iterations());
 }
+BENCHMARK(LUA_WrapperConverter)->Iterations(NUM_ITERATIONS);
 
 ////////////////////////////////////////////////////////////
-
-BENCHMARK(LUA_NewScript)->Iterations(1000000);
-BENCHMARK(LUA_RunScript)->Iterations(1000000);
-BENCHMARK(LUA_SetString)->Iterations(1000000);
-BENCHMARK(LUA_SetStringView)->Iterations(1000000);
-BENCHMARK(LUA_GetAndCallFunction)->Iterations(1000000);
-BENCHMARK(LUA_StructConverter)->Iterations(1000000);
-BENCHMARK(LUA_WrapperConverter)->Iterations(1000000);
-BENCHMARK(LUA_ProtectedCall)->Iterations(1000000);
-BENCHMARK(LUA_UnprotectedCall)->Iterations(1000000);
