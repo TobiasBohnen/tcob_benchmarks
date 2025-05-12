@@ -26,7 +26,7 @@ void static INI_Parse(benchmark::State& state)
             intArray = [1, 2, 3]
             point = { "x" = 100, "y" = 350 }
         )"};
-    data::config::object obj;
+    data::object obj;
 
     for (auto _ : state) {
         auto x = obj.parse(iniString, ".ini");
@@ -57,7 +57,7 @@ void static BINI_Parse(benchmark::State& state)
             intArray = [1, 2, 3]
             point = { "x" = 100, "y" = 350 }
         )"};
-    data::config::object obj;
+    data::object obj;
     obj.parse(iniString, ".ini");
 
     io::iomstream stream;
@@ -105,7 +105,7 @@ void static XML_Parse(benchmark::State& state)
             </point>
         </root>
 )"};
-    data::config::object obj;
+    data::object obj;
 
     for (auto _ : state) {
         auto x = obj.parse(xmlString, ".xml");
@@ -136,7 +136,7 @@ void static JSON_Parse(benchmark::State& state)
             "intArray": [1, 2, 3],
             "point": { "x": 100, "y": 350 }
         })"};
-    data::config::object obj;
+    data::object obj;
 
     for (auto _ : state) {
         auto x = obj.parse(jsonString, ".json");
@@ -165,11 +165,11 @@ void static JSON_Get(benchmark::State& state)
             "intArray": [1, 2, 3],
             "point": { "x": 100, "y": 350 }
         })"};
-    data::config::object obj;
+    data::object obj;
     obj.parse(jsonString, ".json");
 
     for (auto _ : state) {
-        auto x = obj["stringArray"].as<data::config::array>();
+        auto x = obj["stringArray"].as<data::array>();
         benchmark::DoNotOptimize(x);
     }
     state.SetItemsProcessed(state.iterations());
@@ -203,7 +203,7 @@ point:
   x: 100
   y: 350
 )"};
-    data::config::object obj;
+    data::object obj;
 
     for (auto _ : state) {
         auto x = obj.parse(yamlString, ".yaml");
