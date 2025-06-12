@@ -3,7 +3,7 @@ Include(FetchContent)
 FetchContent_Declare(
   benchmark
   GIT_REPOSITORY https://github.com/google/benchmark
-  GIT_TAG v1.9.0
+  GIT_TAG v1.9.4
 )
 
 if(MSVC)

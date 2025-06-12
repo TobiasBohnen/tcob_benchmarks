@@ -1,4 +1,5 @@
 #include "bench.hpp"
+#include "benchmark/benchmark.h"
 #include <string>
 
 using namespace tcob::scripting::lua;
@@ -133,7 +134,7 @@ struct converter<p> {
 
     void static To(state_view state, p const& value)
     {
-        table tab {state};
+        table tab {table::Create(state)};
 
         tab["x"] = value.x;
         tab["y"] = value.y;

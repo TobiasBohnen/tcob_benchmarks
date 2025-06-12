@@ -2,3 +2,6 @@ Diagnostics:
     ClangTidy:
         Remove:
             - "cppcoreguidelines-owning-memory"
+    UnusedIncludes: Strict
+    MissingIncludes: None
+    
