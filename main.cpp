@@ -2,7 +2,7 @@
 
 auto main(int argc, char** argv) -> int
 {
-    auto pl{tcob::platform::HeadlessInit(argv[0])};
+    auto pl {tcob::platform::HeadlessInit()};
 
     benchmark::Initialize(&argc, argv);
     benchmark::RunSpecifiedBenchmarks();
