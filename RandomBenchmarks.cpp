@@ -6,7 +6,7 @@ constexpr i32 NUM_ITERATIONS {10000000};
 
 ////////////////////////////////////////////////////////////
 
-void static RANDOM_xoroshiro_128_plus(benchmark::State& state)
+static void RANDOM_xoroshiro_128_plus(benchmark::State& state)
 {
     rng_xoroshiro_128_plus rng {};
     for (auto _ : state) {
@@ -19,7 +19,7 @@ BENCHMARK(RANDOM_xoroshiro_128_plus)->Iterations(NUM_ITERATIONS);
 
 ////////////////////////////////////////////////////////////
 
-void static RANDOM_xoroshiro_128_plus_plus(benchmark::State& state)
+static void RANDOM_xoroshiro_128_plus_plus(benchmark::State& state)
 {
     rng_xoroshiro_128_plus_plus rng {};
     for (auto _ : state) {
@@ -32,7 +32,7 @@ BENCHMARK(RANDOM_xoroshiro_128_plus_plus)->Iterations(NUM_ITERATIONS);
 
 ////////////////////////////////////////////////////////////
 
-void static RANDOM_xoroshiro_128_star_star(benchmark::State& state)
+static void RANDOM_xoroshiro_128_star_star(benchmark::State& state)
 {
     rng_xoroshiro_128_star_star rng {};
     for (auto _ : state) {
@@ -45,7 +45,7 @@ BENCHMARK(RANDOM_xoroshiro_128_star_star)->Iterations(NUM_ITERATIONS);
 
 ////////////////////////////////////////////////////////////
 
-void static RANDOM_split_mix_64(benchmark::State& state)
+static void RANDOM_split_mix_64(benchmark::State& state)
 {
     rng_split_mix_64 rng {};
     for (auto _ : state) {
@@ -58,7 +58,7 @@ BENCHMARK(RANDOM_split_mix_64)->Iterations(NUM_ITERATIONS);
 
 ////////////////////////////////////////////////////////////
 
-void static RANDOM_xorshift_64(benchmark::State& state)
+static void RANDOM_xorshift_64(benchmark::State& state)
 {
     rng_xorshift_64 rng {};
     for (auto _ : state) {
@@ -71,7 +71,7 @@ BENCHMARK(RANDOM_xorshift_64)->Iterations(NUM_ITERATIONS);
 
 ////////////////////////////////////////////////////////////
 
-void static RANDOM_xorshift_64_star(benchmark::State& state)
+static void RANDOM_xorshift_64_star(benchmark::State& state)
 {
     rng_xorshift_64_star rng {};
     for (auto _ : state) {
@@ -84,7 +84,7 @@ BENCHMARK(RANDOM_xorshift_64_star)->Iterations(NUM_ITERATIONS);
 
 ////////////////////////////////////////////////////////////
 
-void static RANDOM_xoshiro_256_plus(benchmark::State& state)
+static void RANDOM_xoshiro_256_plus(benchmark::State& state)
 {
     rng_xoshiro_256_plus rng {};
     for (auto _ : state) {
@@ -97,7 +97,7 @@ BENCHMARK(RANDOM_xoshiro_256_plus)->Iterations(NUM_ITERATIONS);
 
 ////////////////////////////////////////////////////////////
 
-void static RANDOM_xoshiro_256_plus_plus(benchmark::State& state)
+static void RANDOM_xoshiro_256_plus_plus(benchmark::State& state)
 {
     rng_xoshiro_256_plus_plus rng {};
     for (auto _ : state) {
@@ -110,7 +110,7 @@ BENCHMARK(RANDOM_xoshiro_256_plus_plus)->Iterations(NUM_ITERATIONS);
 
 ////////////////////////////////////////////////////////////
 
-void static RANDOM_xoshiro_256_star_star(benchmark::State& state)
+static void RANDOM_xoshiro_256_star_star(benchmark::State& state)
 {
     rng_xoshiro_256_star_star rng {};
     for (auto _ : state) {

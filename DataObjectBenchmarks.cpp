@@ -7,7 +7,7 @@ constexpr i32 NUM_ITERATIONS {1000000};
 
 ////////////////////////////////////////////////////////////
 
-void static INI_Parse(benchmark::State& state)
+static void INI_Parse(benchmark::State& state)
 {
     static std::string iniString {
         R"(
@@ -38,7 +38,7 @@ BENCHMARK(INI_Parse)->Iterations(NUM_ITERATIONS);
 
 ////////////////////////////////////////////////////////////
 
-void static BINI_Parse(benchmark::State& state)
+static void BINI_Parse(benchmark::State& state)
 {
     static std::string iniString {
         R"(
@@ -73,7 +73,7 @@ BENCHMARK(BINI_Parse)->Iterations(NUM_ITERATIONS);
 
 ////////////////////////////////////////////////////////////
 
-void static XML_Parse(benchmark::State& state)
+static void XML_Parse(benchmark::State& state)
 {
     static std::string xmlString {
         R"(
@@ -117,7 +117,7 @@ BENCHMARK(XML_Parse)->Iterations(NUM_ITERATIONS);
 
 ////////////////////////////////////////////////////////////
 
-void static JSON_Parse(benchmark::State& state)
+static void JSON_Parse(benchmark::State& state)
 {
     static std::string jsonString {
         R"({
@@ -146,7 +146,7 @@ void static JSON_Parse(benchmark::State& state)
 }
 BENCHMARK(JSON_Parse)->Iterations(NUM_ITERATIONS);
 
-void static JSON_Get(benchmark::State& state)
+static void JSON_Get(benchmark::State& state)
 {
     static std::string jsonString {
         R"({
@@ -178,7 +178,7 @@ BENCHMARK(JSON_Get)->Iterations(NUM_ITERATIONS);
 
 ////////////////////////////////////////////////////////////
 
-void static YAML_Parse(benchmark::State& state)
+static void YAML_Parse(benchmark::State& state)
 {
     static std::string yamlString {
         R"(---
@@ -216,7 +216,7 @@ BENCHMARK(YAML_Parse)->Iterations(NUM_ITERATIONS);
 ////////////////////////////////////////////////////////////
 
 #if defined(TCOB_ENABLE_ADDON_SCRIPTING_LUA)
-void static LUA_Parse(benchmark::State& state)
+static void LUA_Parse(benchmark::State& state)
 {
     static std::string luaString {
         R"(return {
@@ -249,7 +249,7 @@ BENCHMARK(LUA_Parse)->Iterations(NUM_ITERATIONS);
 ////////////////////////////////////////////////////////////
 
 #if defined(TCOB_ENABLE_ADDON_SCRIPTING_SQUIRREL)
-void static SQUIRREL_Parse(benchmark::State& state)
+static void SQUIRREL_Parse(benchmark::State& state)
 {
     static std::string nutString {
         R"(return a <- {

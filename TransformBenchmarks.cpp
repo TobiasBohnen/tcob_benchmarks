@@ -2,7 +2,7 @@
 
 ////////////////////////////////////////////////////////////
 
-void static TRANSFORM_TransformPoint(benchmark::State& state)
+static void TRANSFORM_TransformPoint(benchmark::State& state)
 {
     tcob::gfx::transform t {};
     t.rotate(degree_f {45});

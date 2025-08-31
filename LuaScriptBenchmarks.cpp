@@ -8,7 +8,7 @@ constexpr i32 NUM_ITERATIONS {1000000};
 
 ////////////////////////////////////////////////////////////
 
-void static LUA_NewScript(benchmark::State& state)
+static void LUA_NewScript(benchmark::State& state)
 {
     for (auto _ : state) {
         script s {};
@@ -19,7 +19,7 @@ BENCHMARK(LUA_NewScript)->Iterations(NUM_ITERATIONS);
 
 ////////////////////////////////////////////////////////////
 
-void static LUA_RunScript(benchmark::State& state)
+static void LUA_RunScript(benchmark::State& state)
 {
     script s;
     for (auto _ : state) {
@@ -32,7 +32,7 @@ BENCHMARK(LUA_RunScript)->Iterations(NUM_ITERATIONS);
 
 ////////////////////////////////////////////////////////////
 
-void static LUA_SetString(benchmark::State& state)
+static void LUA_SetString(benchmark::State& state)
 {
     script      s;
     auto&       global = s.global_table();
@@ -46,7 +46,7 @@ BENCHMARK(LUA_SetString)->Iterations(NUM_ITERATIONS);
 
 ////////////////////////////////////////////////////////////
 
-void static LUA_SetStringView(benchmark::State& state)
+static void LUA_SetStringView(benchmark::State& state)
 {
     script                     s;
     auto&                      global = s.global_table();
@@ -60,7 +60,7 @@ BENCHMARK(LUA_SetStringView)->Iterations(NUM_ITERATIONS);
 
 ////////////////////////////////////////////////////////////
 
-void static LUA_GetAndCallFunction(benchmark::State& state)
+static void LUA_GetAndCallFunction(benchmark::State& state)
 {
     script                s;
     [[maybe_unused]] auto res = s.run("function foo() return 100 end");
@@ -75,7 +75,7 @@ BENCHMARK(LUA_GetAndCallFunction)->Iterations(NUM_ITERATIONS);
 
 ////////////////////////////////////////////////////////////
 
-void static LUA_ProtectedCall(benchmark::State& state)
+static void LUA_ProtectedCall(benchmark::State& state)
 {
     script                              s;
     [[maybe_unused]] auto               res {s.run("function foo(p,q,r) return p.x + p.y + q.x + q.y + r.x + r.y end")};
@@ -89,7 +89,7 @@ BENCHMARK(LUA_ProtectedCall)->Iterations(NUM_ITERATIONS);
 
 ////////////////////////////////////////////////////////////
 
-void static LUA_UnprotectedCall(benchmark::State& state)
+static void LUA_UnprotectedCall(benchmark::State& state)
 {
     script                              s;
     [[maybe_unused]] auto               res {s.run("function foo(p,q,r) return p.x + p.y + q.x + q.y + r.x + r.y end")};
@@ -109,7 +109,7 @@ struct p {
 namespace tcob::scripting::lua {
 template <>
 struct converter<p> {
-    auto static IsType(state_view state, i32 idx) -> bool
+    static auto IsType(state_view state, i32 idx) -> bool
     {
         if (state.is_table(idx)) {
             table tab {table::Acquire(state, idx)};
@@ -118,7 +118,7 @@ struct converter<p> {
         return false;
     }
 
-    auto static From(state_view state, i32& idx, p& value) -> bool
+    static auto From(state_view state, i32& idx, p& value) -> bool
     {
         if (state.is_table(idx)) {
             table tab {table::Acquire(state, idx++)};
@@ -132,7 +132,7 @@ struct converter<p> {
         return false;
     }
 
-    void static To(state_view state, p const& value)
+    static void To(state_view state, p const& value)
     {
         table tab {table::Create(state)};
 
@@ -142,7 +142,7 @@ struct converter<p> {
 };
 }
 
-void static LUA_StructConverter(benchmark::State& state)
+static void LUA_StructConverter(benchmark::State& state)
 {
     script                            s;
     [[maybe_unused]] auto             res = s.run("function foo() return { x=100, y=200 } end");
@@ -157,7 +157,7 @@ void static LUA_StructConverter(benchmark::State& state)
 }
 BENCHMARK(LUA_StructConverter)->Iterations(NUM_ITERATIONS);
 
-void static LUA_WrapperConverter(benchmark::State& state)
+static void LUA_WrapperConverter(benchmark::State& state)
 {
     script                               s;
     [[maybe_unused]] auto                res = s.run("function foo(p) p.x=100 p.y=200 end");
