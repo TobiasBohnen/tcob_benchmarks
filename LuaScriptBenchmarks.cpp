@@ -163,8 +163,8 @@ static void LUA_WrapperConverter(benchmark::State& state)
     [[maybe_unused]] auto                res = s.run("function foo(p) p.x=100 p.y=200 end");
     tcob::scripting::lua::function<void> f {s.global_table()["foo"]};
     auto                                 wrap = s.create_wrapper<p>("p");
-    wrap->wrap_property<&p::x>("x");
-    wrap->wrap_property<&p::y>("y");
+    wrap->property<&p::x>("x");
+    wrap->property<&p::y>("y");
     p test {};
 
     for (auto _ : state) {
