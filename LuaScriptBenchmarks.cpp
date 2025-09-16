@@ -2,7 +2,7 @@
 #include "benchmark/benchmark.h"
 #include <string>
 
-using namespace tcob::scripting::lua;
+using namespace tcob::scripting;
 
 constexpr i32 NUM_ITERATIONS {1000000};
 
@@ -65,8 +65,8 @@ static void LUA_GetAndCallFunction(benchmark::State& state)
     script                s;
     [[maybe_unused]] auto res = s.run("function foo() return 100 end");
     for (auto _ : state) {
-        tcob::scripting::lua::function<int> f {s.global_table()["foo"]};
-        auto                                x = f();
+        tcob::scripting::function<int> f {s.global_table()["foo"]};
+        auto                           x = f();
         benchmark::DoNotOptimize(x);
     }
     state.SetItemsProcessed(state.iterations());
@@ -77,9 +77,9 @@ BENCHMARK(LUA_GetAndCallFunction)->Iterations(NUM_ITERATIONS);
 
 static void LUA_ProtectedCall(benchmark::State& state)
 {
-    script                              s;
-    [[maybe_unused]] auto               res {s.run("function foo(p,q,r) return p.x + p.y + q.x + q.y + r.x + r.y end")};
-    tcob::scripting::lua::function<int> f {s.global_table()["foo"]};
+    script                         s;
+    [[maybe_unused]] auto          res {s.run("function foo(p,q,r) return p.x + p.y + q.x + q.y + r.x + r.y end")};
+    tcob::scripting::function<int> f {s.global_table()["foo"]};
     for (auto _ : state) {
         benchmark::DoNotOptimize(f.protected_call(point_i {10, 30}, point_i {42, 11}, point_i {88, 65}));
     }
@@ -91,9 +91,9 @@ BENCHMARK(LUA_ProtectedCall)->Iterations(NUM_ITERATIONS);
 
 static void LUA_UnprotectedCall(benchmark::State& state)
 {
-    script                              s;
-    [[maybe_unused]] auto               res {s.run("function foo(p,q,r) return p.x + p.y + q.x + q.y + r.x + r.y end")};
-    tcob::scripting::lua::function<int> f {s.global_table()["foo"]};
+    script                         s;
+    [[maybe_unused]] auto          res {s.run("function foo(p,q,r) return p.x + p.y + q.x + q.y + r.x + r.y end")};
+    tcob::scripting::function<int> f {s.global_table()["foo"]};
     for (auto _ : state) {
         benchmark::DoNotOptimize(f.unprotected_call(point_i {10, 30}, point_i {42, 11}, point_i {88, 65}));
     }
@@ -106,7 +106,7 @@ struct p {
     f32 x;
     f32 y;
 };
-namespace tcob::scripting::lua {
+namespace tcob::scripting {
 template <>
 struct converter<p> {
     static auto IsType(state_view state, i32 idx) -> bool
@@ -144,9 +144,9 @@ struct converter<p> {
 
 static void LUA_StructConverter(benchmark::State& state)
 {
-    script                            s;
-    [[maybe_unused]] auto             res = s.run("function foo() return { x=100, y=200 } end");
-    tcob::scripting::lua::function<p> f {s.global_table()["foo"]};
+    script                       s;
+    [[maybe_unused]] auto        res = s.run("function foo() return { x=100, y=200 } end");
+    tcob::scripting::function<p> f {s.global_table()["foo"]};
 
     for (auto _ : state) {
         p    test {f()};
@@ -159,10 +159,10 @@ BENCHMARK(LUA_StructConverter)->Iterations(NUM_ITERATIONS);
 
 static void LUA_WrapperConverter(benchmark::State& state)
 {
-    script                               s;
-    [[maybe_unused]] auto                res = s.run("function foo(p) p.x=100 p.y=200 end");
-    tcob::scripting::lua::function<void> f {s.global_table()["foo"]};
-    auto                                 wrap = s.create_wrapper<p>("p");
+    script                          s;
+    [[maybe_unused]] auto           res = s.run("function foo(p) p.x=100 p.y=200 end");
+    tcob::scripting::function<void> f {s.global_table()["foo"]};
+    auto                            wrap = s.create_wrapper<p>("p");
     wrap->property<&p::x>("x");
     wrap->property<&p::y>("y");
     p test {};

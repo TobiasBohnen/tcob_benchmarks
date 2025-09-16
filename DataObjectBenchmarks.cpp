@@ -1,7 +1,7 @@
 #include "bench.hpp"
 #include <string>
 
-using namespace tcob::scripting::lua;
+using namespace tcob::scripting;
 
 constexpr i32 NUM_ITERATIONS {1000000};
 
@@ -235,7 +235,7 @@ static void LUA_Parse(benchmark::State& state)
             intArray = {1, 2, 3},
             point = { x = 100, y = 350 }
         })"};
-    scripting::lua::script scr;
+    scripting::script scr;
 
     for (auto _ : state) {
         auto x = scr.run(luaString);
