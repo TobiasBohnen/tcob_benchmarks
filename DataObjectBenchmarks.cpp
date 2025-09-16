@@ -247,36 +247,3 @@ BENCHMARK(LUA_Parse)->Iterations(NUM_ITERATIONS);
 #endif
 
 ////////////////////////////////////////////////////////////
-
-#if defined(TCOB_ENABLE_ADDON_SCRIPTING_SQUIRREL)
-static void SQUIRREL_Parse(benchmark::State& state)
-{
-    static std::string nutString {
-        R"(return a <- {
-            string = "Test",
-            number = 12,
-            bool = true,
-            object = {
-               childString = "foo",
-               childNumber = 77453
-            },
-            map = {
-               a = 123,
-               b = 456
-            },
-            stringArray = ["One", "Two", "Three"],
-            intArray = [1, 2, 3],
-            point = { x = 100, y = 350 }
-        })"};
-    scripting::squirrel::script scr;
-
-    for (auto _ : state) {
-        auto x = scr.run(nutString);
-        benchmark::DoNotOptimize(x);
-    }
-    state.SetItemsProcessed(state.iterations());
-}
-BENCHMARK(SQUIRREL_Parse)->Iterations(NUM_ITERATIONS);
-#endif
-
-////////////////////////////////////////////////////////////
