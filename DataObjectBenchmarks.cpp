@@ -215,7 +215,6 @@ BENCHMARK(YAML_Parse)->Iterations(NUM_ITERATIONS);
 
 ////////////////////////////////////////////////////////////
 
-#if defined(TCOB_ENABLE_ADDON_SCRIPTING_LUA)
 static void LUA_Parse(benchmark::State& state)
 {
     static std::string luaString {
@@ -244,6 +243,5 @@ static void LUA_Parse(benchmark::State& state)
     state.SetItemsProcessed(state.iterations());
 }
 BENCHMARK(LUA_Parse)->Iterations(NUM_ITERATIONS);
-#endif
 
 ////////////////////////////////////////////////////////////

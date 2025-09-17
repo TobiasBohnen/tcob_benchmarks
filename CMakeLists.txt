@@ -26,13 +26,8 @@ set(BENCH_SRCFILES
   QuadTreeBenchmarks.cpp
   RandomBenchmarks.cpp
   TransformBenchmarks.cpp
+  LuaScriptBenchmarks.cpp
 )
-
-if(TCOB_ENABLE_ADDON_SCRIPTING_LUA)
-  list(APPEND BENCH_SRCFILES
-    LuaScriptBenchmarks.cpp
-  )
-endif()
 
 target_compile_definitions(tcob_benchmarks PRIVATE BENCHMARK_STATIC_DEFINE)
 
