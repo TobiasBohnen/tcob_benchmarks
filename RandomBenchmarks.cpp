@@ -47,7 +47,7 @@ BENCHMARK(RANDOM_xoroshiro_128_star_star)->Iterations(NUM_ITERATIONS);
 
 static void RANDOM_split_mix_64(benchmark::State& state)
 {
-    rng_split_mix_64 rng {};
+    prng_split_mix_64 rng {};
     for (auto _ : state) {
         auto x = rng(1, 1000);
         benchmark::DoNotOptimize(x);
