@@ -104,7 +104,7 @@ void QUADTREE_ReplacePadded(benchmark::State& state)
     std::vector<Node> replnodes;
     replnodes.reserve(nodes.size());
     for (auto& node : nodes) {
-        replnodes.push_back({node.box.as_padded_by({0.001f, 0.001})});
+        replnodes.push_back({node.box.as_inset_by({0.001f, 0.001})});
     }
 
     for (auto _ : state) {
