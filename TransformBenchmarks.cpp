@@ -4,7 +4,7 @@
 
 static void TRANSFORM_TransformPoint(benchmark::State& state)
 {
-    tcob::gfx::transform t {};
+    tcob::transform t {};
     t.rotate(degree_f {45});
     t.scale({0.6f, 5.f});
     t.translate({20.f, 34.f});
