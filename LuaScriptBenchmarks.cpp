@@ -105,7 +105,13 @@ BENCHMARK(LUA_UnprotectedCall)->Iterations(NUM_ITERATIONS);
 struct p {
     f32 x;
     f32 y;
+
+    auto get_x() const { return x; }
+    auto get_y() const { return y; }
+    void set_x(f32 xx) { x = xx; }
+    void set_y(f32 yy) { y = yy; }
 };
+
 namespace tcob::scripting {
 template <>
 struct converter<p> {
@@ -162,9 +168,9 @@ static void LUA_WrapperConverter(benchmark::State& state)
     script                          s;
     [[maybe_unused]] auto           res = s.run("function foo(p) p.x=100 p.y=200 end");
     tcob::scripting::function<void> f {s.global_table()["foo"]};
-    auto                            wrap = s.create_wrapper<p>("p");
-    wrap->property<&p::x>("x");
-    wrap->property<&p::y>("y");
+    auto&                           wrap = *s.create_wrapper<p>("p");
+    wrap["x"]                            = tcob::scripting::property {&p::get_x, &p::set_x};
+    wrap["y"]                            = tcob::scripting::property {&p::get_y, &p::set_y};
     p test {};
 
     for (auto _ : state) {

@@ -52,7 +52,7 @@ void QUADTREE_Build(benchmark::State& state)
     auto nodes = generateRandomNodes(static_cast<std::size_t>(state.range()));
     for (auto _ : state) {
         auto intersections = std::vector<std::vector<Node>>(nodes.size());
-        auto quadtree      = tcob::gfx::quadtree<Node>(box);
+        auto quadtree      = tcob::quadtree<Node>(box);
         for (auto& node : nodes) { quadtree.add(node); }
     }
 }
@@ -64,7 +64,7 @@ void QUADTREE_Query4(benchmark::State& state)
     auto nodes = generateRandomNodes(static_cast<std::size_t>(state.range()));
     for (auto _ : state) {
         auto intersections = std::vector<std::vector<Node>>(nodes.size());
-        auto quadtree      = tcob::gfx::quadtree<Node, 4>(box);
+        auto quadtree      = tcob::quadtree<Node, 4>(box);
         for (auto& node : nodes) { quadtree.add(node); }
         for (auto const& node : nodes) { intersections[node.id] = quadtree.query(node.box); }
     }
@@ -77,7 +77,7 @@ void QUADTREE_Query16(benchmark::State& state)
     auto nodes = generateRandomNodes(static_cast<std::size_t>(state.range()));
     for (auto _ : state) {
         auto intersections = std::vector<std::vector<Node>>(nodes.size());
-        auto quadtree      = tcob::gfx::quadtree<Node, 16>(box);
+        auto quadtree      = tcob::quadtree<Node, 16>(box);
         for (auto& node : nodes) { quadtree.add(node); }
         for (auto const& node : nodes) { intersections[node.id] = quadtree.query(node.box); }
     }
@@ -89,7 +89,7 @@ void QUADTREE_AddRemove(benchmark::State& state)
     auto box   = rect_f(0.0f, 0.0f, 1.0f, 1.0f);
     auto nodes = generateRandomNodes(static_cast<std::size_t>(state.range()));
     for (auto _ : state) {
-        auto quadtree = tcob::gfx::quadtree<Node>(box);
+        auto quadtree = tcob::quadtree<Node>(box);
         for (auto& node : nodes) { quadtree.add(node); }
         for (auto& node : nodes) { quadtree.remove(node); }
         for (auto& node : nodes) { quadtree.add(node); }
@@ -108,7 +108,7 @@ void QUADTREE_ReplacePadded(benchmark::State& state)
     }
 
     for (auto _ : state) {
-        auto quadtree = tcob::gfx::quadtree<Node>(box);
+        auto quadtree = tcob::quadtree<Node>(box);
         for (auto& node : nodes) { quadtree.add(node); }
         for (usize i {0}; i < nodes.size(); ++i) {
             quadtree.replace(nodes[i], replnodes[i]);
@@ -124,7 +124,7 @@ void QUADTREE_ReplaceRandom(benchmark::State& state)
     auto replnodes = generateRandomNodes(static_cast<std::size_t>(state.range()));
 
     for (auto _ : state) {
-        auto quadtree = tcob::gfx::quadtree<Node>(box);
+        auto quadtree = tcob::quadtree<Node>(box);
         for (auto& node : nodes) { quadtree.add(node); }
         for (usize i {0}; i < nodes.size(); ++i) {
             quadtree.replace(nodes[i], replnodes[i]);
@@ -138,7 +138,7 @@ void QUADTREE_FindAllIntersections(benchmark::State& state)
     auto box   = rect_f(0.0f, 0.0f, 1.0f, 1.0f);
     auto nodes = generateRandomNodes(static_cast<std::size_t>(state.range()));
     for (auto _ : state) {
-        auto quadtree = tcob::gfx::quadtree<Node>(box);
+        auto quadtree = tcob::quadtree<Node>(box);
         for (auto& node : nodes) { quadtree.add(node); }
         auto intersections = quadtree.find_all_intersections();
     }

@@ -3,7 +3,7 @@ Include(FetchContent)
 FetchContent_Declare(
   benchmark
   GIT_REPOSITORY https://github.com/google/benchmark
-  GIT_TAG v1.9.4
+  GIT_TAG v1.9.5
 )
 
 if(MSVC)
@@ -14,7 +14,7 @@ set(BENCHMARK_USE_BUNDLED_GTEST OFF)
 set(BENCHMARK_ENABLE_GTEST_TESTS OFF)
 set(BENCHMARK_ENABLE_TESTING OFF)
 set(BENCHMARK_ENABLE_INSTALL OFF)
-
+add_compile_options(-Wno-error=missing-format-attribute)
 FetchContent_MakeAvailable(benchmark)
 
 add_executable(tcob_benchmarks)
